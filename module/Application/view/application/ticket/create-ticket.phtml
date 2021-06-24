@@ -1,0 +1,12 @@
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Cadastro Ticket</h4>
+            <?php
+            echo $this->flashMessenger()->render('error', ['alert alert-danger alert-dismissible']);
+            echo $this->flashMessenger()->render('success', ['alert alert-success alert-dismissible']);
+            ?>
+            <?= $this->partial('application/ticket/form')?>
+        </div>
+    </div>
+</div>

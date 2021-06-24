@@ -1,0 +1,20 @@
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edição de Ticket</h4>
+            <?php
+            echo $this->flashMessenger()->render('error', ['alert alert-danger alert-dismissible']);
+            echo $this->flashMessenger()->render('success', ['alert alert-success alert-dismissible']);
+            ?>
+            <?= $this->partial('application/ticket/form')?>
+            <?php if (count($this->attachment) > 0): ?>
+            <p><strong>Arquivos</strong></p>
+            <ul>
+                <?php foreach ($this->attachment as $attachment): ?>
+                    <li><a target="_blank" href="<?= $this->basePath('upload/') . $attachment->file;  ?>"><?= $attachment->name?></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

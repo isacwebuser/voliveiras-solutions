@@ -1,0 +1,52 @@
+<?php echo $this->form()->openTag($this->form); ?>
+<?php echo $this->formHidden($this->form->get('csrf'));?>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group row <?php echo $this->formElementErrors($this->form->get('assunto')) ? 'has-error' : ''; ?>">
+            <label class="col-sm-3 col-form-label">
+                <?php echo $this->form->get('assunto')->getLabel();?>
+            </label>
+            <?php echo $this->formText($this->form->get('assunto'));?>
+            <?php echo $this->formElementErrors($this->form->get('assunto')); ?>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group row <?php echo $this->formElementErrors($this->form->get('priority')) ? 'has-error' : ''; ?>">
+            <?php echo $this->form->get('priority')->getLabel();?>
+            <div class="col-sm-9">
+                <?php echo $this->formSelect($this->form->get('priority'));?>
+                <?php echo $this->formElementErrors($this->form->get('priority')); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group row <?php echo $this->formElementErrors($this->form->get('description')) ? 'has-error' : ''; ?>">
+            <?php echo $this->form->get('description')->getLabel();?>
+            <div class="col-sm-9">
+                <?php echo $this->formTextarea($this->form->get('description'));?>
+                <?php echo $this->formElementErrors($this->form->get('description')); ?>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row <?php echo $this->formElementErrors($this->form->get('attachment')) ? 'has-error' : ''; ?>">
+                <?php echo $this->form->get('attachment')->getLabel();?>
+                <div class="col-sm-9">
+                    <?php echo $this->formFile($this->form->get('attachment'));?>
+                    <p class="mdi-block-helper">"Formatos esperados: PNG ou JPG</p>
+                    <?php echo $this->formElementErrors($this->form->get('attachment')); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<button type="submit" class="btn btn-primary btn-icon-text">
+    <i class="mdi mdi-file-check btn-icon-prepend"></i>
+    Salvar
+</button>
+<?php echo $this->form()->closeTag($this->form); ?>

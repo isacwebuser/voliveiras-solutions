@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="card-body">
+        <div align="right">
+            <p class="card-title" align="left">Recent Purchases</p>
+            <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                <a class="mdi mdi-plus text-muted" href="<?= $this->url('ticket', ['controller' => 'Ticket', 'action' => 'createTicket']);?>"></a>
+            </button>
+        </div>
+        <?php
+        echo $this->flashMessenger()->render('error', ['alert alert-danger alert-dismissible']);
+        echo $this->flashMessenger()->render('success', ['alert alert-success alert-dismissible']);
+        ?>
+        <div class="table-responsive">
+            <div id="recent-purchases-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="recent-purchases-listing" class="table dataTable no-footer" role="grid">
+                            <thead>
+                            <tr role="row"><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 118px;">ID</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Status report: activate to sort column ascending" style="width: 154px;">Assunto</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Proridade</th><th class="sorting_desc" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" aria-sort="descending" style="width: 45px;">Autor</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 77px;">Data Criação</th><th colspan="2">Ações</th></tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            /**
+                             * @var $ticket \Application\Model\Ticket
+                             * @var $user \User\Model\UserTable
+                             */
+                            ?>
+                            <?php foreach ($this->paginator as $ticket):?>
+                            <tr role="row" class="odd">
+                                <td class=""><?= $this->escapeHtml($ticket->id); ?></td>
+                                <td class=""><?= $this->escapeHtml($ticket->assunto); ?></td>
+                                <?php
+                                    $priority = \Application\Model\Ticket::getPriority($ticket->priority);
+                                    $priority ? $priority : '-';
+                                ?>
+                                <td class="sorting_1"><?= $this->escapeHtml($priority); ?></td>
+                                <td class="sorting_1"><?= $this->escapeHtml($ticket->user); ?></td>
+                                <td><?= $this->escapeHtml($ticket->created_at); ?></td>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <a class="mdi mdi-grease-pencil" href="<?= $this->url('ticket', ['controller' => 'Ticket', 'action' => 'editTicket', 'id' => $ticket->id]);?>"></a>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <a class="mdi mdi-delete" href="<?= $this->url('ticket', ['controller' => 'Ticket', 'action' => 'deleteTicket', 'id' => $ticket->id]);?>"></a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?= $this->paginationControl(
+                            $this->paginator,
+                            'Sliding',
+                            'application/ticket/paginator',
+                            ['route' => 'ticket']
+                        ) ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
